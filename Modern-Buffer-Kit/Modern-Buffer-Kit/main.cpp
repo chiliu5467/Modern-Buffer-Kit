@@ -12,7 +12,25 @@ void TestBuffer()
     std::cout << buffer.Size() << '\n';
 }
 
+void TestAt()
+{
+    try
+    {
+        Buffer buffer(5);
+
+        buffer.At(2) = 42;
+        std::cout << buffer.At(2) << '\n';
+
+        std::cout << buffer.At(100) << '\n';
+    }
+    catch (const std::out_of_range& e)
+    {
+        std::cout << "Out of range: " << e.what() << '\n';
+    }
+}
+
 int main() 
 {
-	TestBuffer();
+    TestBuffer();
+    TestAt();
 }

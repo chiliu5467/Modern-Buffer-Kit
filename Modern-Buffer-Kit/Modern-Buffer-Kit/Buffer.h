@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <cstddef>
 
 class Buffer
 {
@@ -11,6 +12,9 @@ class Buffer
 
         int& operator[](std::size_t index);
         const int& operator[](std::size_t index) const;
+
+        int& At(std::size_t index);
+        const int& At(std::size_t index) const;
 
     private:
         std::vector<int> data_;

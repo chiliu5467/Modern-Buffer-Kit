@@ -1,8 +1,8 @@
 #include "Buffer.h"
 
 Buffer::Buffer(std::size_t size) 
+	: data_(size)
 {
-	data_ = std::vector<int>(size);
 }
 
 std::size_t Buffer::Size() const
@@ -23,4 +23,14 @@ int& Buffer::operator[](std::size_t index)
 const int& Buffer::operator[](std::size_t index) const
 {
 	return data_[index];
+}
+
+int& Buffer::At(std::size_t index)
+{
+	return data_.at(index);
+}
+
+const int& Buffer::At(std::size_t index) const
+{
+	return data_.at(index);
 }
