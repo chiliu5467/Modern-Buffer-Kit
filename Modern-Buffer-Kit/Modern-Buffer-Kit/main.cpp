@@ -1,5 +1,6 @@
 ﻿#include "Buffer.h"
 #include <iostream>
+#include <stdexcept>
 
 void TestBuffer()
 {
@@ -29,8 +30,25 @@ void TestAt()
     }
 }
 
+void TestCopySemantics()
+{
+    Buffer original(3);
+
+    original[0] = 10;
+    original[1] = 20;
+    original[2] = 30;
+
+    Buffer copy = original;
+
+    copy[0] = 999;
+
+    std::cout << "original: " << original[0] << '\n';
+    std::cout << "copy: " << copy[0] << '\n';
+}
+
 int main() 
 {
     TestBuffer();
     TestAt();
+    TestCopySemantics();
 }
