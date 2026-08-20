@@ -69,10 +69,34 @@ void TestMoveSemantics()
     std::cout << moved.Size() << '\n';
 }
 
+void TestMoveAssignment()
+{
+    Buffer source(3);
+
+    source[0] = 10;
+    source[1] = 20;
+    source[2] = 30;
+
+    Buffer destination(5);
+
+    std::cout << "Size of source before: " << source.Size() << '\n';
+    std::cout << "Size of destination before: " << destination.Size() << '\n';
+
+    destination = std::move(source);
+
+    std::cout << destination[0] << '\n';
+    std::cout << destination[1] << '\n';
+    std::cout << destination[2] << '\n';
+
+    std::cout << "Size of source after: " << source.Size() << '\n';
+    std::cout << "Size of destination after: " << destination.Size() << '\n';
+}
+
 int main() 
 {
     TestBuffer();
     TestAt();
     TestCopySemantics();
     TestMoveSemantics();
+    TestMoveAssignment();
 }
