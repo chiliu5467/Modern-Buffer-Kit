@@ -61,12 +61,20 @@ void TestMoveSemantics()
 
     Buffer moved = std::move(original);
 
+    // 驗證 destination 收到正確資料
     std::cout << moved[0] << '\n';
     std::cout << moved[1] << '\n';
     std::cout << moved[2] << '\n';
 
-    std::cout << original.Size() << '\n';
-    std::cout << moved.Size() << '\n';
+    // 不假設 original move 後的 size
+    // 而是驗證它仍然可以重新被賦值、繼續使用
+    original = Buffer(2);
+
+    original[0] = 100;
+    original[1] = 200;
+
+    std::cout << original[0] << '\n';
+    std::cout << original[1] << '\n';
 }
 
 void TestMoveAssignment()
@@ -79,17 +87,19 @@ void TestMoveAssignment()
 
     Buffer destination(5);
 
-    std::cout << "Size of source before: " << source.Size() << '\n';
-    std::cout << "Size of destination before: " << destination.Size() << '\n';
-
     destination = std::move(source);
 
+    // 驗證 destination 收到資料
     std::cout << destination[0] << '\n';
     std::cout << destination[1] << '\n';
     std::cout << destination[2] << '\n';
 
-    std::cout << "Size of source after: " << source.Size() << '\n';
-    std::cout << "Size of destination after: " << destination.Size() << '\n';
+    // 不檢查 source.Size() 是否為 0
+    // 驗證 moved-from source 仍然可以重新使用
+    source = Buffer(1);
+    source[0] = 99;
+
+    std::cout << source[0] << '\n';
 }
 
 int main() 
