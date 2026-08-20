@@ -1,6 +1,11 @@
 ﻿#include "Buffer.h"
 #include <iostream>
 #include <stdexcept>
+#include <utility>
+#include <type_traits>
+
+static_assert(std::is_move_constructible_v<Buffer>, "Buffer should be move constructible");
+static_assert(std::is_move_assignable_v<Buffer>, "Buffer should be move assignable");
 
 void TestBuffer()
 {
@@ -46,9 +51,28 @@ void TestCopySemantics()
     std::cout << "copy: " << copy[0] << '\n';
 }
 
+void TestMoveSemantics()
+{
+    Buffer original(3);
+
+    original[0] = 10;
+    original[1] = 20;
+    original[2] = 30;
+
+    Buffer moved = std::move(original);
+
+    std::cout << moved[0] << '\n';
+    std::cout << moved[1] << '\n';
+    std::cout << moved[2] << '\n';
+
+    std::cout << original.Size() << '\n';
+    std::cout << moved.Size() << '\n';
+}
+
 int main() 
 {
     TestBuffer();
     TestAt();
     TestCopySemantics();
+    TestMoveSemantics();
 }
