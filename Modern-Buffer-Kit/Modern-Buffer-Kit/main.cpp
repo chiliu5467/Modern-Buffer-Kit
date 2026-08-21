@@ -4,6 +4,8 @@
 #include <utility>
 #include <type_traits>
 
+static_assert(std::is_copy_constructible_v<Buffer>, "Buffer should be copy constructible");
+static_assert(std::is_copy_assignable_v<Buffer>, "Buffer should be copy assignable");
 static_assert(std::is_move_constructible_v<Buffer>, "Buffer should be move constructible");
 static_assert(std::is_move_assignable_v<Buffer>, "Buffer should be move assignable");
 
@@ -14,7 +16,7 @@ void TestBuffer()
     buffer[0] = 10;
     buffer[1] = 20;
 
-    std::cout << buffer[0] << '\n';
+    std::cout << buffer.At(1) << '\n';
     std::cout << buffer.Size() << '\n';
 }
 
